@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const key = import.meta.env.VITE_UNSPLASH_API_KEY
+const key = "dkxziKdBSuKQwj-GULdXC9ShAe9ptS1noSEz8NmGB6w"
 
 export default axios.create({
     baseURL:"https://api.unsplash.com/search",
