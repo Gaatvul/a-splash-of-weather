@@ -2,9 +2,23 @@
   --element-background: rgba(0, 0, 0, 0.8);
 }
 
+@font-face {
+  font-display: swap; 
+  font-family: 'Golos Text';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./assets/fonts/golos-text-v3-latin-regular.eot'); 
+  src: url('./assets/fonts/golos-text-v3-latin-regular.eot?#iefix') format('embedded-opentype'), 
+       url('./assets/fonts/golos-text-v3-latin-regular.woff2') format('woff2'),
+       url('./assets/fonts/golos-text-v3-latin-regular.woff') format('woff'),
+       url('./assets/fonts/golos-text-v3-latin-regular.ttf') format('truetype'),
+       url('./assets/fonts/golos-text-v3-latin-regular.svg#GolosText') format('svg');
+}
+
 html,
 body {
   text-align: center;
+  font-family: 'Golos Text', 'Courier New', sans-serif;
   padding: 0;
   margin: 0;
   height: 100%;
@@ -17,7 +31,7 @@ body {
   height: 100%;
 }
 
-@media only screen and (max-width: 950px) {
+@media only screen and (max-width: 767px) {
   /* For tablets: */
   .container {
     flex-flow: column;
@@ -29,7 +43,7 @@ body {
   width: 67%;
 }
 
-@media only screen and (max-width: 950px) {
+@media only screen and (max-width: 767px) {
   /* For tablets: */
   .main {
     width: 100%;
@@ -41,10 +55,10 @@ body {
   align-items: center;
   justify-content: center;
   margin-top: 70vh;
-  margin-right: 10vw;
+  margin-right: 8vw;
 }
 
-@media only screen and (max-width: 950px) {
+@media only screen and (max-width: 767px) {
   /* For tablets: */
   .current-weather {
     margin-top: 0;
@@ -63,7 +77,7 @@ body {
   text-align: start;
 }
 
-@media only screen and (max-width: 950px) {
+@media only screen and (max-width: 767px) {
   /* For tablets: */
   .location {
     font-size: 2rem;
@@ -77,7 +91,7 @@ body {
   text-align: start;
 }
 
-@media only screen and (max-width: 950px) {
+@media only screen and (max-width: 767px) {
   /* For tablets: */
   .time {
     margin-top: 0;
@@ -123,8 +137,14 @@ body {
 @media only screen and (max-width: 950px) {
   /* For tablets: */
   .sidebar {
+    width: 43%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  /* For mobile: */
+  .sidebar {
     width: 100%;
-    overflow-y: scroll;
   }
 }
 
@@ -161,6 +181,57 @@ body {
   background: radial-gradient(#3f3f3f, black);
 }
 
+.unit-choice {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(1.5rem);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000000;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
 .current-weather-details {
   margin: 3rem 5rem;
   padding-bottom: 1rem;
@@ -180,6 +251,14 @@ body {
   margin-left: 0.5rem;
   border-bottom: 1px solid;
   border-image: linear-gradient(to right, white 1%, transparent) 1;
+}
+
+.bg-info {
+  margin-bottom: 1rem;
+}
+
+.bg-info a {
+  color: rgb(224, 224, 224);
 }
 
 .forecasts {
