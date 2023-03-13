@@ -5,7 +5,7 @@ import { useGlobalContext } from '../context/context'
 const CurrentWeather = () => {
 
     const {
-        formatTimestamp, toCelsius, place, countryCodes,
+        formatTimestamp, formatTemperature, place, countryCodes,
         currentWeather, setCurrentWeather, icons } = useGlobalContext()
 
     useEffect(() => {
@@ -29,7 +29,7 @@ const CurrentWeather = () => {
         <div className='current-weather'>
             {currentWeather && (
                 <>
-                    <div className='temperature'>{toCelsius(currentWeather.main.temp)} <div className='units'>℃</div> </div>
+                    <div className='temperature'>{formatTemperature(currentWeather.main.temp)}</div>
                     <div className="time-location">
                         <p className='location'>{currentWeather.name}, {countryCodes.get(currentWeather.sys.country)}</p>
                         <p className='time'>{formatTimestamp(currentWeather.dt)}</p>
@@ -38,6 +38,7 @@ const CurrentWeather = () => {
                         <div className='weather-icon'>{icons.get(currentWeather.weather[0].main)}</div>
                         <p className='weather-description'>{currentWeather.weather[0].description}</p>
                     </div>
+                    
                 </>
             )}
         </div>

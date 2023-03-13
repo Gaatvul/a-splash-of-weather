@@ -15,26 +15,28 @@ const AppProvider = ({ children }) => {
         lon: -6.259341390681672
     })
     const [backgroundImage, setBackgroundImage] = useState()
+    const [bgInfo, setBGInfo] = useState()
     const [currentWeather, setCurrentWeather] = useState()
+    const [isCelsius, setIsCelsius] = useState(true)
 
     const isLandscape = window.innerWidth > window.innerHeight
 
     const icons = new Map([
-        ["Thunderstorm", <WiStormShowers />],
-        ["Drizzle", <WiDaySprinkle />],
-        ["Rain", <WiShowers />],
-        ["Snow", <WiSnow />],
-        ["Mist", <WiWindy />],
-        ["Smoke", <WiSmoke />],
-        ["Haze", <WiDayHaze />],
-        ["Fog", <WiFog />],
-        ["Sand", <WiSandstorm />],
-        ["Dust", <WiDust />],
-        ["Ash", <WiDust />],
-        ["Sqall", <WiStrongWind />],
-        ["Tornado", <WiTornado />],
-        ["Clear", <WiDaySunny />],
-        ["Clouds", <WiCloudy />],
+        ["Thunderstorm", <WiStormShowers key={"Thunderstorm"} />],
+        ["Drizzle", <WiDaySprinkle key={"Drizzle"} />],
+        ["Rain", <WiShowers key={"Rain"} />],
+        ["Snow", <WiSnow key={"Snow"} />],
+        ["Mist", <WiWindy key={"Mist"} />],
+        ["Smoke", <WiSmoke key={"Smoke"} />],
+        ["Haze", <WiDayHaze key={"Haze"} />],
+        ["Fog", <WiFog key={"Fog"} />],
+        ["Sand", <WiSandstorm key={"Sand"} />],
+        ["Dust", <WiDust key={"Dust"} />],
+        ["Ash", <WiDust key={"Ash"} />],
+        ["Sqall", <WiStrongWind key={"Sqall"} />],
+        ["Tornado", <WiTornado key={"Tornado"} />],
+        ["Clear", <WiDaySunny key={"Clear"} />],
+        ["Clouds", <WiCloudy key={"Clouds"} />],
     ])
 
     const formatTimestamp = (UNIXTimestamp) => {
@@ -44,6 +46,14 @@ const AppProvider = ({ children }) => {
 
     const toCelsius = (kelvinTemp) => {
         return Math.floor(kelvinTemp - 273.15)
+    }
+
+    const toFahrenheit = (kelvinTemp) => {
+        return Math.floor((kelvinTemp * 1.8) - 459.67)
+    }
+
+    const formatTemperature = (kelvinTemp) => {
+        return (isCelsius ? toCelsius(kelvinTemp) : toFahrenheit(kelvinTemp)) + "°"
     }
 
     const JSONCountryCodes = [{ "Code": "AF", "Name": "Afghanistan" },
@@ -305,6 +315,10 @@ const AppProvider = ({ children }) => {
     }
     JSONToMap()
 
+    const backgroundOrientation = () => {
+        return isLandscape ? ("&w=" + window.screen.width) : ("&h=" + window.screen.height)
+    }
+
 
     useEffect(() => {
         const getBackgroundFromPrompt = async (prompt) => {
@@ -316,22 +330,23 @@ const AppProvider = ({ children }) => {
                         orientation: (isLandscape) ? "landscape" : "portrait"
                     }
                 })
-                setBackgroundImage(response.data.results[randomNumber].urls.raw + "&w=" + window.screen.width)
+                setBackgroundImage(response.data.results[randomNumber].urls.raw + backgroundOrientation())
+                setBGInfo(response.data.results[randomNumber])
             } catch (error) {
                 console.error(error);
             }
         }
         if (currentWeather) {
             getBackgroundFromPrompt("weather " + currentWeather.weather[0].main)
-        } else {
         }
 
     }, [currentWeather])
 
     return <AppContext.Provider value={{
-        formatTimestamp, toCelsius, place, setPlace,
+        formatTimestamp, formatTemperature, place, setPlace,
         countryCodes, backgroundImage, setBackgroundImage,
-        currentWeather, setCurrentWeather, icons
+        currentWeather, setCurrentWeather, icons, bgInfo,
+        isCelsius, setIsCelsius
     }}>
         {children}
     </AppContext.Provider>

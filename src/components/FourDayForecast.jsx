@@ -4,7 +4,7 @@ import { useGlobalContext } from '../context/context'
 
 const FourDayForecast = () => {
 
-    const { formatTimestamp, toCelsius, place, icons } = useGlobalContext()
+    const { formatTimestamp, formatTemperature, place, icons } = useGlobalContext()
     const [forecasts, setForecasts] = useState()
 
     const getDayOfMonth = (timestamp) => {
@@ -16,7 +16,7 @@ const FourDayForecast = () => {
     }
 
     const extractForecastsByDay = (unfilteredForecasts) => {
-        var dayOfMonth = new Date().getDate()
+        let dayOfMonth = new Date().getDate()
         const filteredForecasts = {
             forecastsToday: [],
             forecastsTomorrow: [],
@@ -26,7 +26,7 @@ const FourDayForecast = () => {
             forecastsDay6: [],
         }
 
-        for (var dayOfForecasts in filteredForecasts) {
+        for (let dayOfForecasts in filteredForecasts) {
 
             filteredForecasts[dayOfForecasts] = unfilteredForecasts.filter(forecast => getDayOfMonth(forecast.dt) === dayOfMonth)
 
@@ -70,7 +70,7 @@ const FourDayForecast = () => {
                                         <div key={forecast.dt} className="forecast">
                                             <div>{getHourFromTimestamp(forecast.dt_txt)}</div>
                                             <div className='forecast-icon'>{icons.get(forecast.weather[0].main)}</div>
-                                            <div>{toCelsius(forecast.main.temp)}</div>
+                                            <div>{formatTemperature(forecast.main.temp)}</div>
                                         </div>
                                     )
                                 })}
@@ -86,7 +86,7 @@ const FourDayForecast = () => {
                                     <div key={forecast.dt} className="forecast">
                                         <div>{getHourFromTimestamp(forecast.dt_txt)}</div>
                                         <div className='forecast-icon'>{icons.get(forecast.weather[0].main)}</div>
-                                        <div>{toCelsius(forecast.main.temp)}</div>
+                                        <div>{formatTemperature(forecast.main.temp)}</div>
                                     </div>
                                 )
                             })}
@@ -100,7 +100,7 @@ const FourDayForecast = () => {
                                     <div key={forecast.dt} className="forecast">
                                         <div>{getHourFromTimestamp(forecast.dt_txt)}</div>
                                         <div className='forecast-icon'>{icons.get(forecast.weather[0].main)}</div>
-                                        <div>{toCelsius(forecast.main.temp)}</div>
+                                        <div>{formatTemperature(forecast.main.temp)}</div>
                                     </div>
                                 )
                             })}
@@ -114,7 +114,7 @@ const FourDayForecast = () => {
                                     <div key={forecast.dt} className="forecast">
                                         <div>{getHourFromTimestamp(forecast.dt_txt)}</div>
                                         <div className='forecast-icon'>{icons.get(forecast.weather[0].main)}</div>
-                                        <div>{toCelsius(forecast.main.temp)}</div>
+                                        <div>{formatTemperature(forecast.main.temp)}</div>
                                     </div>
                                 )
                             })}
@@ -128,7 +128,7 @@ const FourDayForecast = () => {
                                     <div key={forecast.dt} className="forecast">
                                         <div>{getHourFromTimestamp(forecast.dt_txt)}</div>
                                         <div className='forecast-icon'>{icons.get(forecast.weather[0].main)}</div>
-                                        <div>{toCelsius(forecast.main.temp)}</div>
+                                        <div>{formatTemperature(forecast.main.temp)}</div>
                                     </div>
                                 )
                             })}
@@ -143,7 +143,7 @@ const FourDayForecast = () => {
                                         <div key={forecast.dt} className="forecast">
                                             <div>{getHourFromTimestamp(forecast.dt_txt)}</div>
                                             <div className='forecast-icon'>{icons.get(forecast.weather[0].main)}</div>
-                                            <div>{toCelsius(forecast.main.temp)}</div>
+                                            <div>{formatTemperature(forecast.main.temp)}</div>
                                         </div>
                                     )
                                 })}
