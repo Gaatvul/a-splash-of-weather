@@ -58,7 +58,7 @@ const FourDayForecast = () => {
     }, [place])
 
     return (
-        <div className=''>
+        <div>
             {forecasts && (
                 <>
                     {forecasts.forecastsToday.length > 0 &&

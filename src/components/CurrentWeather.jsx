@@ -29,16 +29,17 @@ const CurrentWeather = () => {
         <div className='current-weather'>
             {currentWeather && (
                 <>
+                    <div className="weather">
+                        <div className='weather-icon'>{icons.get(currentWeather.weather[0].main)}</div>
+                        <div>
+                            <p className='weather-description'>{currentWeather.weather[0].description}</p>
+                        </div>
+                    </div>
                     <div className='temperature'>{formatTemperature(currentWeather.main.temp)}</div>
                     <div className="time-location">
                         <p className='location'>{currentWeather.name}, {countryCodes.get(currentWeather.sys.country)}</p>
                         <p className='time'>{formatTimestamp(currentWeather.dt)}</p>
                     </div>
-                    <div className="weather">
-                        <div className='weather-icon'>{icons.get(currentWeather.weather[0].main)}</div>
-                        <p className='weather-description'>{currentWeather.weather[0].description}</p>
-                    </div>
-                    
                 </>
             )}
         </div>

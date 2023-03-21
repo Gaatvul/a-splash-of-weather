@@ -15,7 +15,9 @@ const Search = () => {
                     return (
                         <li key={index} onClick={() => {
                             setPlace(suggestion)
-                            setSearchTerm("")}}>{suggestion.name}, {suggestion.country}</li>
+                            setSearchTerm("")
+                        }}>
+                            {suggestion.name}, {suggestion.country}</li>
                     )
                 })}
             </ul>
@@ -52,7 +54,7 @@ const Search = () => {
 
     return (
         <div className="search-bar">
-            <input type="text" value={searchTerm} id="search-bar-input" placeholder="search..." onChange={e => handleSearch(e)} />
+            <input type="text" value={searchTerm} id="search-bar-input" autoComplete="off" placeholder="search..." onChange={e => handleSearch(e)} />
             {searchTerm && renderDropdown()}
         </div>
     )
