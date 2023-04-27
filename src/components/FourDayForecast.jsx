@@ -75,10 +75,8 @@ const FourDayForecast = () => {
                                     )
                                 })}
                             </div>
-                        </div>)
-                    }
-
-                    <div className="tomorrow">
+                        </div>)}
+                    {forecasts.forecastsTomorrow.length > 0 && (<div className="tomorrow">
                         <div className='day-text'>Tomorrow</div>
                         <div className="forecasts">
                             {forecasts.forecastsTomorrow.map(forecast => {
@@ -91,8 +89,8 @@ const FourDayForecast = () => {
                                 )
                             })}
                         </div>
-                    </div>
-                    <div className="day3">
+                    </div>)}
+                    {forecasts.forecastsDay3.length > 0 && (<div className="day3">
                         <div className='day-text'>{formatTimestamp(forecasts.forecastsDay3[0].dt)}</div>
                         <div className="forecasts">
                             {forecasts.forecastsDay3.map(forecast => {
@@ -105,8 +103,8 @@ const FourDayForecast = () => {
                                 )
                             })}
                         </div>
-                    </div>
-                    <div className="day4">
+                    </div>)}
+                    {forecasts.forecastsDay4.length > 0 && (<div className="day4">
                         <div className='day-text'>{formatTimestamp(forecasts.forecastsDay4[0].dt)}</div>
                         <div className="forecasts">
                             {forecasts.forecastsDay4.map(forecast => {
@@ -119,21 +117,22 @@ const FourDayForecast = () => {
                                 )
                             })}
                         </div>
-                    </div>
-                    <div className="day5">
-                        <div className='day-text'>{formatTimestamp(forecasts.forecastsDay5[0].dt)}</div>
-                        <div className="forecasts">
-                            {forecasts.forecastsDay5.map(forecast => {
-                                return (
-                                    <div key={forecast.dt} className="forecast">
-                                        <div>{getHourFromTimestamp(forecast.dt_txt)}</div>
-                                        <div className='forecast-icon'>{icons.get(forecast.weather[0].main)}</div>
-                                        <div>{formatTemperature(forecast.main.temp)}</div>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </div>
+                    </div>)}
+                    {forecasts.forecastsDay5.length > 0 && (
+                        <div className="day5">
+                            <div className='day-text'>{formatTimestamp(forecasts.forecastsDay5[0].dt)}</div>
+                            <div className="forecasts">
+                                {forecasts.forecastsDay5.map(forecast => {
+                                    return (
+                                        <div key={forecast.dt} className="forecast">
+                                            <div>{getHourFromTimestamp(forecast.dt_txt)}</div>
+                                            <div className='forecast-icon'>{icons.get(forecast.weather[0].main)}</div>
+                                            <div>{formatTemperature(forecast.main.temp)}</div>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>)}
                     {forecasts.forecastsDay6.length > 0 && (
                         <div className="day6">
                             <div className='day-text'>{formatTimestamp(forecasts.forecastsDay6[0].dt)}</div>
@@ -148,8 +147,7 @@ const FourDayForecast = () => {
                                     )
                                 })}
                             </div>
-                        </div>)
-                    }
+                        </div>)}
                 </>
             )}
         </div>
